@@ -1,4 +1,3 @@
-using System;
 using System.Windows.Controls;
 using AnyUI.Utility.Extensions;
 
@@ -28,6 +27,7 @@ public class ChildRenderer
         {
             throw new ArgumentException("child cant have a parent");
         }
+        child.Parent = this as BaseComponent;
         children.Add(child);
         _canvas.PlaceChild(child);
     }
@@ -36,6 +36,7 @@ public class ChildRenderer
     {
         if (children.Remove(child))
         {
+            _canvas.RemoveChild(child);
             child.Parent = null;
         }
         else

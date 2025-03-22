@@ -1,5 +1,6 @@
 ﻿using AnyUI.Components;
 using AnyUI.Components.Util;
+using AnyUI.Styling;
 
 namespace AnyUI;
 class Program
@@ -8,17 +9,17 @@ class Program
     static void Main(string[] args)
     {
         AnyWindow anyWindow = new AnyWindow();
+        Style style = new Style();
+        style.Size.Value = new (300);
+        style.Position.Value = new(100);
 
-        BaseComponent test = new BaseComponent() {
-            Size = new (300),
-            Position = new (10)
+        BaseComponent outer = new BaseComponent() {
+            Style = style,
         };
-        BaseComponent test2 = new BaseComponent() {
-            Size = new (100),
-            Position = new (50)
-        };
-        test.AddChild(test2);
-        anyWindow.AddChild(test);
+        BaseComponent inner = new BaseComponent();
+        
+        outer.AddChild(inner);
+        anyWindow.AddChild(outer);
         anyWindow.Run();
     }
 }

@@ -2,47 +2,57 @@ using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using AnyUI.Styling;
 using AnyUI.Utility.Extensions;
 
 namespace AnyUI.Components.Util;
 
 public class BaseComponent : ChildRenderer
 {
-    public BaseComponent? Parent;
-    public Vector2 Size;
-    public Vector2 Position;
-    public Brush BackgroundColor = new SolidColorBrush(Colors.White);
-    public Brush BorderColor = new SolidColorBrush(Colors.Green);
-    public CornerRadius CornerRadius = new CornerRadius(5, 40, 20, 10);
-    public Thickness BorderThickness = new Thickness(4);
-    
+    private BaseComponent? parent;
+    public BaseComponent? Parent
+    {
+        get { return parent; }
+        set
+        {
+            parent = value;
+            if (parent is null)
+                return;
+            Style.UpdateInheritValues(parent);
+        }
+    }
+    public Styling.Style Style;
+    public BaseComponent()
+    {
+        Style = new();
+    }
+
     public UIElement GenerateUIElement()
     {
-
-        _canvas.Width = Size.X;
-        _canvas.Height = Size.Y;
-        _canvas.Background= BackgroundColor;
+        _canvas.Width = Style.Size.Value.X;
+        _canvas.Height = Style.Size.Value.Y;
+        _canvas.Background = Style.BackgroundColor.Value;
         // Apply Clipping to Canvas to match the Border's rounded corners
         _canvas.Clip = new RectangleGeometry()
         {
-            Rect = new Rect(0, 0, Size.X, Size.Y),
-            RadiusX = CornerRadius.MaxRadius(), // Match the border's CornerRadius
-            RadiusY = CornerRadius.MaxRadius(),
+            Rect = new Rect(0, 0, Style.Size.Value.X, Style.Size.Value.Y),
+            RadiusX = Style.CornerRadius.Value.MaxRadius(), // Match the border's CornerRadius
+            RadiusY = Style.CornerRadius.Value.MaxRadius(),
         };
         Border innerBorder = new Border()
         {
-            CornerRadius = CornerRadius,
-            BorderThickness = BorderThickness,
-            BorderBrush = BackgroundColor,
-            Background = BackgroundColor,
+            CornerRadius = Style.CornerRadius.Value,
+            BorderThickness = Style.BorderThickness.Value,
+            BorderBrush = Style.BackgroundColor.Value,
+            Background = Style.BackgroundColor.Value,
             Child = _canvas,
         };
         Border outerBorder = new Border()
         {
-            CornerRadius = CornerRadius,
-            BorderThickness = BorderThickness,
-            BorderBrush = BorderColor,
-            Background = BorderColor,
+            CornerRadius = Style.CornerRadius.Value,
+            BorderThickness = Style.BorderThickness.Value,
+            BorderBrush = Style.BorderColor.Value,
+            Background =Style.BorderColor.Value,
             Child = innerBorder,
         };
         return outerBorder;

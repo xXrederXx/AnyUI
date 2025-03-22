@@ -17,7 +17,16 @@ public static class CanvasExtension
         }
 
         // Set absolute position
-        Canvas.SetLeft(uIElement, child.Position.X);
-        Canvas.SetTop(uIElement, child.Position.Y);
+        Canvas.SetLeft(uIElement, child.Style.Position.Value.X);
+        Canvas.SetTop(uIElement, child.Style.Position.Value.Y);
+    }
+    public static void RemoveChild(this Canvas canvas, BaseComponent child)
+    {
+        // Ensure the element is added to the canvas
+        UIElement uIElement = child.GenerateUIElement();
+        if (canvas.Children.Contains(uIElement))
+        {
+            canvas.Children.Remove(uIElement);
+        }
     }
 }
