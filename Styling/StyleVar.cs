@@ -1,4 +1,3 @@
-
 namespace AnyUI.Styling;
 
 public class StyleVar<T>
@@ -8,17 +7,22 @@ public class StyleVar<T>
     {
         get
         {
-            if (value is null || value.GetHashCode() == default(T)?.GetHashCode())
-            {
-                return GetDefaultValue;
-            }
-            else
+            if (HasCustomValue && value != null)
             {
                 return value;
             }
+            else
+            {
+                return GetDefaultValue;
+            }
         }
-        set { this.value = value; }
+        set
+        {
+            this.value = value;
+            HasCustomValue = true;
+        }
     }
+    private bool HasCustomValue = false;
     public readonly bool Inherit;
 
     private readonly T defaultValue;

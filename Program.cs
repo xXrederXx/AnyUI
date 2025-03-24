@@ -12,6 +12,7 @@ class Program
         Style style = new Style();
         style.Size.Value = new (300);
         style.Position.Value = new(100);
+        style.BorderThickness.Value = new(10);
 
         Style style2 = new Style();
         style2.Size.Value = new (400);
