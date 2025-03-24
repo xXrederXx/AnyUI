@@ -7,7 +7,7 @@ public class MyMath
     public static double Max(params double[] values)
     {
         double max = double.MinValue;
-        foreach (var value in values)
+        foreach (double value in values)
         {
             max = Math.Max(max, value);
         }

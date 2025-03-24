@@ -22,9 +22,13 @@ public class BaseComponent : ChildRenderer
         }
     }
     public Styling.Style Style;
+
     public BaseComponent()
     {
-        Style = new();
+        if (Style is null)
+        {
+            Style = new();
+        }
     }
 
     public UIElement GenerateUIElement()
@@ -52,9 +56,14 @@ public class BaseComponent : ChildRenderer
             CornerRadius = Style.CornerRadius.Value,
             BorderThickness = Style.BorderThickness.Value,
             BorderBrush = Style.BorderColor.Value,
-            Background =Style.BorderColor.Value,
+            Background = Style.BorderColor.Value,
             Child = innerBorder,
         };
-        return outerBorder;
+        return FinishUIElementGeneration(outerBorder);
+    }
+
+    protected virtual UIElement FinishUIElementGeneration(UIElement element)
+    {
+        return element;
     }
 }

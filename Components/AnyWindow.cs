@@ -1,6 +1,8 @@
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using AnyUI.Components.Util;
+using AnyUI.Utility.UI;
 
 namespace AnyUI.Components;
 
@@ -9,7 +11,7 @@ public class AnyWindow : ChildRenderer
 #pragma warning disable CS8618 // if it would be null after leafing cunstructor, the constructor threw an exception
     private static Application app;
 #pragma warning restore CS8618
-    private Window window;
+    private readonly Window window;
 
     public AnyWindow()
     {
@@ -19,12 +21,18 @@ public class AnyWindow : ChildRenderer
         }
         window = new Window();
         app = new Application();
-        window.Content = _canvas;
+        ScrollViewer scroll = new ScrollViewer();
+        scroll.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+        scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        scroll.Content = _canvas;
+        window.Content = scroll;
         _canvas.Background = new SolidColorBrush(Color.FromArgb(255, 255, 0, 1));
     }
 
     public void Run()
     {
+        _canvas.MinHeight = CalculateDimensions.CalculateHeight(this);
+        _canvas.MinWidth = CalculateDimensions.CalculateWidth(this);
         app.Run(window);
     }
 }

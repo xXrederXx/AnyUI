@@ -5,7 +5,7 @@ namespace AnyUI.Components.Util;
 
 public class ChildRenderer
 {
-    private List<BaseComponent> children = [];
+    public readonly List<BaseComponent> children = [];
     protected readonly Canvas _canvas;
 
     public ChildRenderer()
