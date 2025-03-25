@@ -9,6 +9,7 @@ namespace AnyUI.Components.Util;
 
 public class BaseComponent : ChildRenderer
 {
+    public string Uid { get; private set; } = string.Empty;
     private BaseComponent? parent;
     public BaseComponent? Parent
     {
@@ -63,7 +64,11 @@ public class BaseComponent : ChildRenderer
             Background = Style.BorderColor,
             Child = innerBorder,
         };
-        return FinishUIElementGeneration(outerBorder);
+        UIElement element = FinishUIElementGeneration(outerBorder);
+        string uid = element.GetHashCode().ToString();
+        element.Uid = uid;
+        Uid = uid;
+        return element;
     }
 
     protected virtual UIElement FinishUIElementGeneration(UIElement element)
