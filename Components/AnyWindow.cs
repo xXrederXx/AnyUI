@@ -21,18 +21,18 @@ public class AnyWindow : ChildRenderer
         }
         window = new Window();
         app = new Application();
-        ScrollViewer scroll = new ScrollViewer();
+        ScrollViewer scroll = new();
         scroll.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-        scroll.Content = _canvas;
+        scroll.Content = canvas;
         window.Content = scroll;
-        _canvas.Background = new SolidColorBrush(Color.FromArgb(255, 255, 0, 1));
+        canvas.Background = new SolidColorBrush(Color.FromArgb(255, 255, 0, 1));
     }
 
     public void Run()
     {
-        _canvas.MinHeight = CalculateDimensions.CalculateHeight(this);
-        _canvas.MinWidth = CalculateDimensions.CalculateWidth(this);
+        canvas.MinHeight = CalculateDimensions.CalculateHeight(this);
+        canvas.MinWidth = CalculateDimensions.CalculateWidth(this);
         app.Run(window);
     }
 }

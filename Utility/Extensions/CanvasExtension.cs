@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using AnyUI.Components.Util;
@@ -10,23 +11,25 @@ public static class CanvasExtension
     public static void PlaceChild(this Canvas canvas, BaseComponent child)
     {
         // Ensure the element is added to the canvas
-        UIElement uIElement = child.GenerateUIElement();
-        if (!canvas.Children.Contains(uIElement))
+        UIElement element = child.GenerateUIElement();
+        if (!canvas.Children.Contains(element))
         {
-            canvas.Children.Add(uIElement);
+            canvas.Children.Add(element);
         }
 
         // Set absolute position
-        Canvas.SetLeft(uIElement, child.Style.Position.Value.X);
-        Canvas.SetTop(uIElement, child.Style.Position.Value.Y);
+        Vector2 position = child.Style.Position;
+        Canvas.SetLeft(element, position.X);
+        Canvas.SetTop(element, position.Y);
     }
+
     public static void RemoveChild(this Canvas canvas, BaseComponent child)
     {
         // Ensure the element is added to the canvas
-        UIElement uIElement = child.GenerateUIElement();
-        if (canvas.Children.Contains(uIElement))
+        UIElement element = child.GenerateUIElement();
+        if (canvas.Children.Contains(element))
         {
-            canvas.Children.Remove(uIElement);
+            canvas.Children.Remove(element);
         }
     }
 }

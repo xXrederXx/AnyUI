@@ -31,7 +31,7 @@ public class StyleVar<T>
 
     public StyleVar(bool inherit, T defaultValue)
     {
-        this.Inherit = inherit;
+        Inherit = inherit;
         this.defaultValue = defaultValue;
         value = default;
     }
@@ -40,4 +40,6 @@ public class StyleVar<T>
     {
         parentValue = parentStyleVar.Value;
     }
+
+    public static implicit operator T(StyleVar<T> styleVar) => styleVar.Value;
 }

@@ -3,34 +3,29 @@ using AnyUI.Components.Util;
 using AnyUI.Styling;
 
 namespace AnyUI;
+
 class Program
 {
+    static Style style = new();
     [STAThread] // Required for WPF
     static void Main(string[] args)
     {
-        AnyWindow anyWindow = new AnyWindow();
-        Style style = new Style();
-        style.Size.Value = new (300);
+        AnyWindow anyWindow = new();
+
+        style.Size.Value = new(300);
         style.Position.Value = new(100);
         style.BorderThickness.Value = new(10);
+        style.CornerRadius.Value = new(100);
 
-        Style style2 = new Style();
-        style2.Size.Value = new (400);
-        style2.Position.Value = new(500, 700);
-        style2.BorderThickness.Value = new(0, 0, 20, 20);
+        BaseComponent outer = new() { Style = style };
+        _ = ChangeRadius();
 
-        BaseComponent outer = new BaseComponent() {
-            Style = style,
-        };
-        BaseComponent inner = new BaseComponent();
-
-        BaseComponent far = new BaseComponent() {
-            Style = style2,
-        };
-        
-        outer.AddChild(inner);
         anyWindow.AddChild(outer);
-        anyWindow.AddChild(far);
         anyWindow.Run();
+    }
+    static async Task ChangeRadius()
+    {
+        await Task.Delay(1000);
+        style.CornerRadius.Value = new(style.CornerRadius.Value.TopRight / 100 * 90);
     }
 }

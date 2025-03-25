@@ -33,30 +33,34 @@ public class BaseComponent : ChildRenderer
 
     public UIElement GenerateUIElement()
     {
-        _canvas.Width = Style.Size.Value.X;
-        _canvas.Height = Style.Size.Value.Y;
-        _canvas.Background = Style.BackgroundColor.Value;
+        Vector2 size = Style.Size;
+        CornerRadius cornerRadius = Style.CornerRadius;
+
+        canvas.Width = size.X;
+        canvas.Height = size.Y;
+
+        canvas.Background = Style.BackgroundColor;
         // Apply Clipping to Canvas to match the Border's rounded corners
-        _canvas.Clip = new RectangleGeometry()
+        canvas.Clip = new RectangleGeometry()
         {
-            Rect = new Rect(0, 0, Style.Size.Value.X, Style.Size.Value.Y),
-            RadiusX = Style.CornerRadius.Value.MaxRadius(), // Match the border's CornerRadius
-            RadiusY = Style.CornerRadius.Value.MaxRadius(),
+            Rect = new Rect(0, 0, size.X, size.Y),
+            RadiusX = cornerRadius.MaxRadius(), // Match the border's CornerRadius
+            RadiusY = cornerRadius.MaxRadius(),
         };
-        Border innerBorder = new Border()
+        Border innerBorder = new()
         {
-            CornerRadius = Style.CornerRadius.Value,
-            BorderThickness = Style.BorderThickness.Value,
-            BorderBrush = Style.BackgroundColor.Value,
-            Background = Style.BackgroundColor.Value,
-            Child = _canvas,
+            CornerRadius = Style.CornerRadius,
+            BorderThickness = Style.BorderThickness,
+            BorderBrush = Style.BackgroundColor,
+            Background = Style.BackgroundColor,
+            Child = canvas,
         };
-        Border outerBorder = new Border()
+        Border outerBorder = new()
         {
-            CornerRadius = Style.CornerRadius.Value,
-            BorderThickness = Style.BorderThickness.Value,
-            BorderBrush = Style.BorderColor.Value,
-            Background = Style.BorderColor.Value,
+            CornerRadius = Style.CornerRadius,
+            BorderThickness = Style.BorderThickness,
+            BorderBrush = Style.BorderColor,
+            Background = Style.BorderColor,
             Child = innerBorder,
         };
         return FinishUIElementGeneration(outerBorder);
