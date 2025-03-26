@@ -7,7 +7,7 @@ namespace AnyUI.Components;
 
 public class AnyLabel : BaseComponent
 {
-    public string Text = string.Empty;
+    public string Text = "AnyLabel";
     public AnyLabel()
     {
         Style = new Styling.Style(

@@ -25,8 +25,13 @@ class Program
         anyLabel.Style.CornerRadius.Value = new(4);
         anyLabel.Text = "A looong text xD xD";
 
+        AnyButton anyButton = new();
+        anyButton.OnClick += () => System.Console.WriteLine("Click");
+        anyButton.Style.Position.Value = new(0, 10);
+
         outer.AddChild(anyLabel);
         anyWindow.AddChild(outer);
+        anyWindow.AddChild(anyButton);
         anyWindow.Run();
     }
 }
