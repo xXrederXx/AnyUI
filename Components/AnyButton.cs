@@ -27,7 +27,7 @@ public class AnyButton : BaseComponent
         Style = style;
     }
 
-    private Button GenerateButton()
+    private Button generateButton()
     {
         Button button = new Button();
         Vector2 size = Style.Size;
@@ -56,7 +56,7 @@ public class AnyButton : BaseComponent
 
     protected override UIElement FinishUIElementGeneration(UIElement element)
     {
-        canvas.Children.Add(GenerateButton());
+        canvas.Children.Add(generateButton());
         return element;
     }
 }

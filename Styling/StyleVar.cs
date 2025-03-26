@@ -23,13 +23,13 @@ public class StyleVar<T>
             OnChanged?.Invoke();
         }
     }
-    private bool HasCustomValue = false;
     public readonly bool Inherit;
-
-    private readonly T defaultValue;
-    private T? parentValue;
-    private T GetDefaultValue => Inherit && parentValue is not null ? parentValue : defaultValue;
     public Action? OnChanged;
+
+    private T? parentValue;
+    private readonly T defaultValue;
+    private T GetDefaultValue => Inherit && parentValue is not null ? parentValue : defaultValue;
+    private bool HasCustomValue = false;
 
     public StyleVar(bool inherit, T defaultValue)
     {

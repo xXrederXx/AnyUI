@@ -11,7 +11,13 @@ public record class Font
     public FontWeight Weight;
     public FontStretch Stretch;
 
-    public Font(FontFamily Family, double Size, FontStyle Style, FontWeight Weight, FontStretch Stretch)
+    public Font(
+        FontFamily Family,
+        double Size,
+        FontStyle Style,
+        FontWeight Weight,
+        FontStretch Stretch
+    )
     {
         this.Family = Family;
         this.Size = Size;

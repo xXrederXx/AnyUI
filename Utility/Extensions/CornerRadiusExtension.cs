@@ -1,5 +1,3 @@
-using System;
-using System.Numerics;
 using System.Windows;
 using System.Windows.Media;
 
@@ -12,16 +10,18 @@ public static class CornerRadiusExtension
         return MyMath.Max(radius.TopLeft, radius.TopRight, radius.BottomLeft, radius.BottomRight);
     }
 
-    public static PathGeometry GenerateClip(this CornerRadius radius, double ActualWidth, double ActualHeight)
+    public static PathGeometry GenerateClip(
+        this CornerRadius radius,
+        double ActualWidth,
+        double ActualHeight
+    )
     {
         PathGeometry clip = new PathGeometry();
 
         PathFigure figure = new PathFigure { StartPoint = new Point(radius.TopLeft, 0) };
 
         // Top edge
-        figure.Segments.Add(
-            new LineSegment(new Point(ActualWidth - radius.TopRight, 0), true)
-        );
+        figure.Segments.Add(new LineSegment(new Point(ActualWidth - radius.TopRight, 0), true));
         figure.Segments.Add(
             new ArcSegment(
                 new Point(ActualWidth, radius.TopRight),
@@ -35,10 +35,7 @@ public static class CornerRadiusExtension
 
         // Right edge
         figure.Segments.Add(
-            new LineSegment(
-                new Point(ActualWidth, ActualHeight - radius.BottomRight),
-                true
-            )
+            new LineSegment(new Point(ActualWidth, ActualHeight - radius.BottomRight), true)
         );
         figure.Segments.Add(
             new ArcSegment(
@@ -52,9 +49,7 @@ public static class CornerRadiusExtension
         );
 
         // Bottom edge
-        figure.Segments.Add(
-            new LineSegment(new Point(radius.BottomLeft, ActualHeight), true)
-        );
+        figure.Segments.Add(new LineSegment(new Point(radius.BottomLeft, ActualHeight), true));
         figure.Segments.Add(
             new ArcSegment(
                 new Point(0, ActualHeight - radius.BottomLeft),

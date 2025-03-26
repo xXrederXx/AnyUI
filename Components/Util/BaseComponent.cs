@@ -8,8 +8,9 @@ namespace AnyUI.Components.Util;
 
 public class BaseComponent : ChildRenderer
 {
-    protected string UidPrefix;
     public string Uid { get; private set; } = string.Empty;
+    public UIElement? LastGenerated { get; protected set; }
+
     private BaseComponent? parent;
     public BaseComponent? Parent
     {
@@ -22,6 +23,7 @@ public class BaseComponent : ChildRenderer
             Style.UpdateInheritValues(parent);
         }
     }
+
     private Styling.Style style;
     public Styling.Style Style
     {
@@ -36,7 +38,8 @@ public class BaseComponent : ChildRenderer
             style.OnStyleChanged += () => parent?.ReRender();
         }
     }
-    public UIElement? LastGenerated { get; protected set; }
+
+    protected string uidPrefix;
 
 #pragma warning disable CS8618 // Will get assigned
     public BaseComponent()
@@ -67,10 +70,13 @@ public class BaseComponent : ChildRenderer
             Background = Style.BorderColor,
             Child = canvas,
         };
+
         UIElement element = FinishUIElementGeneration(outerBorder);
+
         string uid = element.GetHashCode().ToString();
-        element.Uid = UidPrefix + uid;
+        element.Uid = uidPrefix + uid;
         Uid = uid;
+
         LastGenerated = element;
         return element;
     }

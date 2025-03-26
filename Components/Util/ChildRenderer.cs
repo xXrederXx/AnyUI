@@ -5,7 +5,7 @@ namespace AnyUI.Components.Util;
 
 public class ChildRenderer
 {
-    public readonly List<BaseComponent> children = [];
+    public readonly List<BaseComponent> Children = [];
     protected Canvas canvas;
 
     public ChildRenderer()
@@ -23,16 +23,15 @@ public class ChildRenderer
 
     public void ReRender()
     {
-        if (children.Count == 0)
+        if (Children.Count == 0)
         {
-            System.Console.WriteLine("Leaf Node");
             return;
         }
-        foreach (BaseComponent child in children)
+
+        foreach (BaseComponent child in Children)
         {
-            if (child as AnyWindow is not null)
+            if (child as AnyWindow is not null) // This will be executed if the child is a Window, so it dosnt break
             {
-                System.Console.WriteLine("CHILD WINDOW");
                 child.ReRender();
                 child.GenerateUIElement();
                 continue;
@@ -54,13 +53,13 @@ public class ChildRenderer
             throw new ArgumentException("child cant have a parent");
         }
         child.Parent = this as BaseComponent;
-        children.Add(child);
+        Children.Add(child);
         canvas.PlaceChild(child);
     }
 
     public void RemoveChild(BaseComponent child)
     {
-        if (children.Remove(child))
+        if (Children.Remove(child))
         {
             canvas.RemoveChild(child);
             child.Parent = null;

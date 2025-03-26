@@ -1,16 +1,15 @@
 ﻿using System.Windows.Media;
 using AnyUI.Components;
 using AnyUI.Components.Util;
-using AnyUI.Styling;
 
 namespace AnyUI;
 
-class Program
+internal class Program
 {
-    static readonly AnyWindow anyWindow = new();
+    private static readonly AnyWindow anyWindow = new();
 
     [STAThread] // Required for WPF
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         BaseComponent outer = new();
         outer.Style.Size.Value = new(300);

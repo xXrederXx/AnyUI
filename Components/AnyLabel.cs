@@ -20,7 +20,7 @@ public class AnyLabel : BaseComponent
         Style = style;
     }
 
-    private Label GenerateLabel()
+    private Label generateLabel()
     {
         Label label = new Label();
         Vector2 size = Style.Size;
@@ -44,7 +44,7 @@ public class AnyLabel : BaseComponent
 
     protected override UIElement FinishUIElementGeneration(UIElement element)
     {
-        canvas.Children.Add(GenerateLabel());
+        canvas.Children.Add(generateLabel());
         return element;
     }
 }

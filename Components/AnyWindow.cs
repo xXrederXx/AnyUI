@@ -1,6 +1,5 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using AnyUI.Components.Util;
 using AnyUI.Utility.UI;
 
@@ -12,7 +11,7 @@ public class AnyWindow : BaseComponent
     private static Application app;
 #pragma warning restore CS8618
     private readonly Window window;
-    private ScrollViewer scroll = new();
+    private readonly ScrollViewer scroll = new();
 
     public AnyWindow()
     {
@@ -27,10 +26,10 @@ public class AnyWindow : BaseComponent
         scroll.Content = canvas;
         window.Content = scroll;
         canvas.Background = Style.BackgroundColor;
-        UidPrefix = "Win";
+        uidPrefix = "Win";
         LastGenerated = canvas;
         BaseComponent parent = new();
-        parent.children.Add(this);
+        parent.Children.Add(this);
         this.Parent = parent;
     }
 
@@ -43,7 +42,7 @@ public class AnyWindow : BaseComponent
     public override UIElement GenerateUIElement()
     {
         canvas.Background = Style.BackgroundColor;
-        canvas.Uid = UidPrefix + canvas.GetHashCode();
+        canvas.Uid = uidPrefix + canvas.GetHashCode();
         return scroll;
     }
 }

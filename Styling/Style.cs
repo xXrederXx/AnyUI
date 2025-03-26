@@ -17,6 +17,7 @@ public class Style
     public readonly StyleVar<Brush> TextColor;
     public readonly StyleVar<Font> Font;
     public Action? OnStyleChanged;
+
     public Style(
         Vector2? Size = null,
         Vector2? Position = null,
@@ -35,10 +36,21 @@ public class Style
         this.CornerRadius = new(false, CornerRadius ?? new(0));
         this.BorderThickness = new(false, BorderThickness ?? new(0));
         this.TextColor = new(true, TextColor ?? new SolidColorBrush(Colors.Black));
-        this.Font = new(true, Font ?? new(new FontFamily("Arial"), 12, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal));
-        
+        this.Font = new(
+            true,
+            Font
+                ?? new(
+                    new FontFamily("Arial"),
+                    12,
+                    FontStyles.Normal,
+                    FontWeights.Normal,
+                    FontStretches.Normal
+                )
+        );
+
         SubscribeActions();
     }
+
     private void SubscribeActions()
     {
         void ToCall()
@@ -58,7 +70,7 @@ public class Style
 
     public void UpdateInheritValues(BaseComponent? parent)
     {
-        if(parent is null)
+        if (parent is null)
         {
             return;
         }

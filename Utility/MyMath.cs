@@ -1,5 +1,3 @@
-using System;
-
 namespace AnyUI.Utility;
 
 public class MyMath
