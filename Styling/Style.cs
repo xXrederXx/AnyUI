@@ -16,7 +16,7 @@ public class Style
     public readonly StyleVar<Thickness> BorderThickness;
     public readonly StyleVar<Brush> TextColor;
     public readonly StyleVar<Font> Font;
-
+    public Action? OnStyleChanged;
     public Style(
         Vector2? Size = null,
         Vector2? Position = null,
@@ -36,6 +36,24 @@ public class Style
         this.BorderThickness = new(false, BorderThickness ?? new(0));
         this.TextColor = new(true, TextColor ?? new SolidColorBrush(Colors.Black));
         this.Font = new(true, Font ?? new(new FontFamily("Arial"), 12, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal));
+        
+        SubscribeActions();
+    }
+    private void SubscribeActions()
+    {
+        void ToCall()
+        {
+            OnStyleChanged?.Invoke();
+        }
+
+        Size.OnChanged += ToCall;
+        Position.OnChanged += ToCall;
+        BackgroundColor.OnChanged += ToCall;
+        BorderColor.OnChanged += ToCall;
+        CornerRadius.OnChanged += ToCall;
+        BorderThickness.OnChanged += ToCall;
+        TextColor.OnChanged += ToCall;
+        Font.OnChanged += ToCall;
     }
 
     public void UpdateInheritValues(BaseComponent? parent)

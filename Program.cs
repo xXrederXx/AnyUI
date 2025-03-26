@@ -27,7 +27,7 @@ class Program
         anyLabel.Text = "A looong text xD xD";
 
         AnyButton anyButton = new();
-        anyButton.OnClick += () => System.Console.WriteLine("Click");
+        anyButton.OnClick += () => anyWindow.Style.BackgroundColor.Value = new SolidColorBrush(Colors.Orange);
         anyButton.Style.Position.Value = new(0, 10);
 
         outer.AddChild(anyLabel);

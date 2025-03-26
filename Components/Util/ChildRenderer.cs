@@ -6,7 +6,7 @@ namespace AnyUI.Components.Util;
 public class ChildRenderer
 {
     public readonly List<BaseComponent> children = [];
-    protected readonly Canvas canvas;
+    protected Canvas canvas;
 
     public ChildRenderer()
     {
@@ -23,13 +23,30 @@ public class ChildRenderer
 
     public void ReRender()
     {
-        canvas.Children.Clear();
-        foreach(var child in children)
+        if (children.Count == 0)
         {
-            canvas.PlaceChild(child);
-            child.ReRender();
+            System.Console.WriteLine("Leaf Node");
+            return;
+        }
+        foreach (BaseComponent child in children)
+        {
+            if (child as AnyWindow is not null)
+            {
+                System.Console.WriteLine("CHILD WINDOW");
+                child.ReRender();
+                child.GenerateUIElement();
+                continue;
+            }
+            else
+            {
+                canvas.RemoveChild(child);
+                child.Reset();
+                child.ReRender();
+                canvas.PlaceChild(child);
+            }
         }
     }
+
     public void AddChild(BaseComponent child)
     {
         if (child.Parent != null)

@@ -8,6 +8,7 @@ namespace AnyUI.Components.Util;
 
 public class BaseComponent : ChildRenderer
 {
+    protected string UidPrefix;
     public string Uid { get; private set; } = string.Empty;
     private BaseComponent? parent;
     public BaseComponent? Parent
@@ -21,8 +22,23 @@ public class BaseComponent : ChildRenderer
             Style.UpdateInheritValues(parent);
         }
     }
-    public Styling.Style Style { get; protected set; }
+    private Styling.Style style;
+    public Styling.Style Style
+    {
+        get { return style; }
+        protected set
+        {
+            if (style is not null)
+            {
+                style.OnStyleChanged -= () => parent?.ReRender();
+            }
+            style = value;
+            style.OnStyleChanged += () => parent?.ReRender();
+        }
+    }
+    public UIElement? LastGenerated { get; protected set; }
 
+#pragma warning disable CS8618 // Will get assigned
     public BaseComponent()
     {
         if (Style is null)
@@ -30,8 +46,9 @@ public class BaseComponent : ChildRenderer
             Style = new();
         }
     }
+#pragma warning restore CS8618
 
-    public UIElement GenerateUIElement()
+    public virtual UIElement GenerateUIElement()
     {
         Vector2 size = Style.Size;
         CornerRadius cornerRadius = Style.CornerRadius;
@@ -41,6 +58,7 @@ public class BaseComponent : ChildRenderer
 
         canvas.Background = Style.BackgroundColor;
         canvas.Clip = cornerRadius.GenerateClip(canvas.Width, canvas.Height);
+
         Border outerBorder = new()
         {
             CornerRadius = Style.CornerRadius,
@@ -51,9 +69,15 @@ public class BaseComponent : ChildRenderer
         };
         UIElement element = FinishUIElementGeneration(outerBorder);
         string uid = element.GetHashCode().ToString();
-        element.Uid = uid;
+        element.Uid = UidPrefix + uid;
         Uid = uid;
+        LastGenerated = element;
         return element;
+    }
+
+    public void Reset()
+    {
+        canvas = new Canvas();
     }
 
     protected virtual UIElement FinishUIElementGeneration(UIElement element)

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,10 +27,13 @@ public static class CanvasExtension
     public static void RemoveChild(this Canvas canvas, BaseComponent child)
     {
         // Ensure the element is added to the canvas
-        UIElement element = child.GenerateUIElement();
+        UIElement? element = child.LastGenerated;
         if (canvas.Children.Contains(element))
         {
             canvas.Children.Remove(element);
+            System.Console.WriteLine("remove");
+        } else {
+            System.Console.WriteLine("Cant remove -> " + child.Uid);
         }
     }
 }
