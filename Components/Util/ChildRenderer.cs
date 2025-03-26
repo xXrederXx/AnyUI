@@ -21,13 +21,13 @@ public class ChildRenderer
         this.canvas = canvas;
     }
 
-    public void ReRender(BaseComponent node)
+    public void ReRender()
     {
         canvas.Children.Clear();
         foreach(var child in children)
         {
             canvas.PlaceChild(child);
-            child.ReRender(child);
+            child.ReRender();
         }
     }
     public void AddChild(BaseComponent child)

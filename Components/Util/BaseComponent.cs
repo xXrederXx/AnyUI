@@ -41,28 +41,14 @@ public class BaseComponent : ChildRenderer
         canvas.Height = size.Y;
 
         canvas.Background = Style.BackgroundColor;
-        // Apply Clipping to Canvas to match the Border's rounded corners
-        canvas.Clip = new RectangleGeometry()
-        {
-            Rect = new Rect(0, 0, size.X, size.Y),
-            RadiusX = cornerRadius.MaxRadius(), // Match the border's CornerRadius
-            RadiusY = cornerRadius.MaxRadius(),
-        };
-        Border innerBorder = new()
-        {
-            CornerRadius = Style.CornerRadius,
-            BorderThickness = Style.BorderThickness,
-            BorderBrush = Style.BackgroundColor,
-            Background = Style.BackgroundColor,
-            Child = canvas,
-        };
+        canvas.Clip = cornerRadius.GenerateClip(canvas.Width, canvas.Height);
         Border outerBorder = new()
         {
             CornerRadius = Style.CornerRadius,
             BorderThickness = Style.BorderThickness,
             BorderBrush = Style.BorderColor,
             Background = Style.BorderColor,
-            Child = innerBorder,
+            Child = canvas,
         };
         UIElement element = FinishUIElementGeneration(outerBorder);
         string uid = element.GetHashCode().ToString();
