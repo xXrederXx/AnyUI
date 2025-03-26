@@ -2,6 +2,7 @@ using System.Numerics;
 using System.Windows;
 using System.Windows.Media;
 using AnyUI.Components.Util;
+using AnyUI.Utility.Types;
 
 namespace AnyUI.Styling;
 
@@ -13,6 +14,8 @@ public class Style
     public readonly StyleVar<Brush> BorderColor;
     public readonly StyleVar<CornerRadius> CornerRadius;
     public readonly StyleVar<Thickness> BorderThickness;
+    public readonly StyleVar<Brush> TextColor;
+    public readonly StyleVar<Font> Font;
 
     public Style(
         Vector2? Size = null,
@@ -20,7 +23,9 @@ public class Style
         Brush? BackgroundColor = null,
         Brush? BorderColor = null,
         CornerRadius? CornerRadius = null,
-        Thickness? BorderThickness = null
+        Thickness? BorderThickness = null,
+        Brush? TextColor = null,
+        Font? Font = null
     )
     {
         this.Size = new(false, Size ?? new(20));
@@ -29,15 +34,23 @@ public class Style
         this.BorderColor = new(false, BorderColor ?? new SolidColorBrush(Colors.Transparent));
         this.CornerRadius = new(false, CornerRadius ?? new(0));
         this.BorderThickness = new(false, BorderThickness ?? new(0));
+        this.TextColor = new(true, TextColor ?? new SolidColorBrush(Colors.Black));
+        this.Font = new(true, Font ?? new(new FontFamily("Arial"), 12, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal));
     }
 
-    public void UpdateInheritValues(BaseComponent parent)
+    public void UpdateInheritValues(BaseComponent? parent)
     {
+        if(parent is null)
+        {
+            return;
+        }
         Size.UpdateStyleVar(parent.Style.Size);
         Position.UpdateStyleVar(parent.Style.Position);
         BackgroundColor.UpdateStyleVar(parent.Style.BackgroundColor);
         BorderColor.UpdateStyleVar(parent.Style.BorderColor);
         CornerRadius.UpdateStyleVar(parent.Style.CornerRadius);
         BorderThickness.UpdateStyleVar(parent.Style.BorderThickness);
+        TextColor.UpdateStyleVar(parent.Style.TextColor);
+        Font.UpdateStyleVar(parent.Style.Font);
     }
 }

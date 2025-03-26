@@ -18,6 +18,7 @@ class Program
         outer.Style.BorderThickness.Value = new(10);
         outer.Style.CornerRadius.Value = new(20, 20, 4, 50);
         outer.Style.BorderColor.Value = new SolidColorBrush(Colors.Black);
+        outer.Style.TextColor.Value = new SolidColorBrush(Colors.Red);
 
         AnyLabel anyLabel = new();
         anyLabel.Style.Size.Value = new(200, 50);
