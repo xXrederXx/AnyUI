@@ -14,15 +14,23 @@ public class Style
     public readonly StyleVar<CornerRadius> CornerRadius;
     public readonly StyleVar<Thickness> BorderThickness;
 
-    public Style()
+    public Style(
+        Vector2? Size = null,
+        Vector2? Position = null,
+        Brush? BackgroundColor = null,
+        Brush? BorderColor = null,
+        CornerRadius? CornerRadius = null,
+        Thickness? BorderThickness = null
+    )
     {
-        Size = new(false, new Vector2(10));
-        Position = new(false, new Vector2(0));
-        BackgroundColor = new(false, new SolidColorBrush(Colors.White));
-        BorderColor = new(false, new SolidColorBrush(Colors.Black));
-        CornerRadius = new(false, new CornerRadius(4));
-        BorderThickness = new(false, new Thickness(2));
+        this.Size = new(false, Size ?? new(20));
+        this.Position = new(false, Position ?? new(0));
+        this.BackgroundColor = new(false, BackgroundColor ?? new SolidColorBrush(Colors.White));
+        this.BorderColor = new(false, BorderColor ?? new SolidColorBrush(Colors.Transparent));
+        this.CornerRadius = new(false, CornerRadius ?? new(0));
+        this.BorderThickness = new(false, BorderThickness ?? new(0));
     }
+
     public void UpdateInheritValues(BaseComponent parent)
     {
         Size.UpdateStyleVar(parent.Style.Size);

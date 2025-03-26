@@ -1,7 +1,6 @@
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using AnyUI.Styling;
 using AnyUI.Utility.Extensions;
 
@@ -22,7 +21,7 @@ public class BaseComponent : ChildRenderer
             Style.UpdateInheritValues(parent);
         }
     }
-    public Styling.Style Style;
+    public Styling.Style Style { get; protected set; }
 
     public BaseComponent()
     {
