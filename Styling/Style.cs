@@ -16,6 +16,8 @@ public class Style
     public readonly StyleVar<Thickness> BorderThickness;
     public readonly StyleVar<Brush> TextColor;
     public readonly StyleVar<Font> Font;
+    public readonly StyleVar<Thickness> Margin;
+    public readonly StyleVar<Thickness> Padding;
     public Action? OnStyleChanged;
 
     public Style(
@@ -26,7 +28,9 @@ public class Style
         CornerRadius? CornerRadius = null,
         Thickness? BorderThickness = null,
         Brush? TextColor = null,
-        Font? Font = null
+        Font? Font = null,
+        Thickness? Margin = null,
+        Thickness? Padding = null
     )
     {
         this.Size = new(false, Size ?? new(20));
@@ -47,6 +51,8 @@ public class Style
                     FontStretches.Normal
                 )
         );
+        this.Margin = new(false, Margin ?? new(0));
+        this.Padding = new(false, Padding ?? new(0));
 
         SubscribeActions();
     }
@@ -66,6 +72,8 @@ public class Style
         BorderThickness.OnChanged += ToCall;
         TextColor.OnChanged += ToCall;
         Font.OnChanged += ToCall;
+        Margin.OnChanged += ToCall;
+        Padding.OnChanged += ToCall;
     }
 
     public void UpdateInheritValues(BaseComponent? parent)
@@ -74,13 +82,16 @@ public class Style
         {
             return;
         }
-        Size.UpdateStyleVar(parent.Style.Size);
-        Position.UpdateStyleVar(parent.Style.Position);
-        BackgroundColor.UpdateStyleVar(parent.Style.BackgroundColor);
-        BorderColor.UpdateStyleVar(parent.Style.BorderColor);
-        CornerRadius.UpdateStyleVar(parent.Style.CornerRadius);
-        BorderThickness.UpdateStyleVar(parent.Style.BorderThickness);
-        TextColor.UpdateStyleVar(parent.Style.TextColor);
-        Font.UpdateStyleVar(parent.Style.Font);
+        Style style = parent.Style;
+        Size.UpdateStyleVar(style.Size);
+        Position.UpdateStyleVar(style.Position);
+        BackgroundColor.UpdateStyleVar(style.BackgroundColor);
+        BorderColor.UpdateStyleVar(style.BorderColor);
+        CornerRadius.UpdateStyleVar(style.CornerRadius);
+        BorderThickness.UpdateStyleVar(style.BorderThickness);
+        TextColor.UpdateStyleVar(style.TextColor);
+        Font.UpdateStyleVar(style.Font);
+        Margin.UpdateStyleVar(style.Margin);
+        Padding.UpdateStyleVar(style.Padding);
     }
 }

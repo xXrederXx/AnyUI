@@ -62,7 +62,7 @@ public class BaseComponent : ChildRenderer
         canvas.Background = Style.BackgroundColor;
         canvas.Clip = cornerRadius.GenerateClip(canvas.Width, canvas.Height);
 
-        Border outerBorder = new()
+        Border border = new()
         {
             CornerRadius = Style.CornerRadius,
             BorderThickness = Style.BorderThickness,
@@ -71,7 +71,7 @@ public class BaseComponent : ChildRenderer
             Child = canvas,
         };
 
-        UIElement element = outerBorder;
+        UIElement element = border;
         FinishUIElementGeneration();
 
         string uid = element.GetHashCode().ToString();
