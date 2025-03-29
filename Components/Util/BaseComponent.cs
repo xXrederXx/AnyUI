@@ -71,7 +71,8 @@ public class BaseComponent : ChildRenderer
             Child = canvas,
         };
 
-        UIElement element = FinishUIElementGeneration(outerBorder);
+        UIElement element = outerBorder;
+        FinishUIElementGeneration();
 
         string uid = element.GetHashCode().ToString();
         element.Uid = uidPrefix + uid;
@@ -86,8 +87,7 @@ public class BaseComponent : ChildRenderer
         canvas = new Canvas();
     }
 
-    protected virtual UIElement FinishUIElementGeneration(UIElement element)
+    protected virtual void FinishUIElementGeneration()
     {
-        return element;
     }
 }

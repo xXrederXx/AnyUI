@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using AnyUI.Components.Util;
 using AnyUI.Utility.Types;
+using AnyUI.Utility.UI;
 
 namespace AnyUI.Components;
 
@@ -29,23 +30,8 @@ public class AnyButton : BaseComponent
 
     private Button generateButton()
     {
-        Button button = new Button();
-        Vector2 size = Style.Size;
-        Font font = Style.Font;
-
-        button.Width = size.X;
-        button.Height = size.Y;
-
-        button.Background = Style.BackgroundColor;
+        Button button = WPFHelper.ApplyBaseStyle(new Button(), Style);
         button.Content = Text;
-
-        button.FontFamily = font.Family;
-        button.FontSize = font.Size;
-        button.FontStretch = font.Stretch;
-        button.FontStyle = font.Style;
-        button.FontWeight = font.Weight;
-        button.Foreground = Style.TextColor;
-
         if (OnClick != null)
         {
             button.Click += (s, e) => OnClick.Invoke();
@@ -54,9 +40,8 @@ public class AnyButton : BaseComponent
         return button;
     }
 
-    protected override UIElement FinishUIElementGeneration(UIElement element)
+    protected override void FinishUIElementGeneration()
     {
         canvas.Children.Add(generateButton());
-        return element;
     }
 }

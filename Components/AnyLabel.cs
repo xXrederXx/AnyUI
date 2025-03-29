@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using AnyUI.Components.Util;
 using AnyUI.Utility.Types;
+using AnyUI.Utility.UI;
 
 namespace AnyUI.Components;
 
@@ -22,29 +23,14 @@ public class AnyLabel : BaseComponent
 
     private Label generateLabel()
     {
-        Label label = new Label();
-        Vector2 size = Style.Size;
-        Font font = Style.Font;
-
-        label.Width = size.X;
-        label.Height = size.Y;
-
-        label.FontFamily = font.Family;
-        label.FontSize = font.Size;
-        label.FontStretch = font.Stretch;
-        label.FontStyle = font.Style;
-        label.FontWeight = font.Weight;
-        label.Foreground = Style.TextColor;
-
-        label.Background = Style.BackgroundColor;
+        Label label = WPFHelper.ApplyBaseStyle(new Label(), Style);
         label.Content = Text;
 
         return label;
     }
 
-    protected override UIElement FinishUIElementGeneration(UIElement element)
+    protected override void FinishUIElementGeneration()
     {
         canvas.Children.Add(generateLabel());
-        return element;
     }
 }
