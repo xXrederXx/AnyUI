@@ -1,8 +1,8 @@
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using AnyUI.Components.Util;
-using AnyUI.Utility.Types;
 using AnyUI.Utility.UI;
 
 namespace AnyUI.Components;
@@ -13,7 +13,7 @@ public class AnyLabel : BaseComponent
 
     public AnyLabel()
     {
-        Style = new Styling.Style(Size: new Vector2(200, 24));
+        Style = new Styling.Style(Size: new Vector2(200, 24), BackgroundColor: new SolidColorBrush(Colors.Transparent));
     }
 
     public AnyLabel(Styling.Style style)
