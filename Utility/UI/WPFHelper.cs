@@ -7,7 +7,8 @@ namespace AnyUI.Utility.UI;
 
 public static class WPFHelper
 {
-    public static T ApplyBaseStyle<T>(T element, Style style) where T : ContentControl {
+    public static T ApplyBaseStyle<T>(T element, Style style) where T : ContentControl
+    {
         Vector2 size = style.Size;
         Font font = style.Font;
 
@@ -22,6 +23,7 @@ public static class WPFHelper
         element.FontStretch = font.Stretch;
         element.FontStyle = font.Style;
         element.FontWeight = font.Weight;
+
 
         return element;
     }

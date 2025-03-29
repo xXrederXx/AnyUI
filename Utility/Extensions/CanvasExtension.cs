@@ -30,7 +30,9 @@ public static class CanvasExtension
         {
             canvas.Children.Remove(element);
             System.Console.WriteLine("remove");
-        } else {
+        }
+        else
+        {
             System.Console.WriteLine("Cant remove -> " + child.Uid);
         }
     }

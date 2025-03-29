@@ -87,7 +87,5 @@ public class BaseComponent : ChildRenderer
         canvas = new Canvas();
     }
 
-    protected virtual void FinishUIElementGeneration()
-    {
-    }
+    protected virtual void FinishUIElementGeneration() { }
 }
