@@ -21,30 +21,41 @@ public class AnyWindow : BaseComponent
             throw new Exception("You already opened a Window. To open another use the class xyz");
         }
         instance = this;
+
         window = new Window();
         app = new Application();
+
         scroll.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
         scroll.Content = Canvas;
+
         window.Content = scroll;
+
         Canvas.Background = Style.BackgroundColor;
+
         uidPrefix = "Win";
+
         LastGenerated = Canvas;
+
         BaseComponent parent = new();
         parent.Children.Add(this);
         this.Parent = parent;
+
+        Style = new Styling.Style(Size: new(700, 500));
     }
 
     public void Run()
     {
-        Canvas.MinHeight = CalculateDimensions.CalculateHeight(this);
-        Canvas.MinWidth = CalculateDimensions.CalculateWidth(this);
+        GenerateUIElement();
         app.Run(window);
     }
     public override UIElement GenerateUIElement()
     {
+        WPFHelper.ApplyBaseStyle(window, Style);
         Canvas.Background = Style.BackgroundColor;
         Canvas.Uid = uidPrefix + Canvas.GetHashCode();
+        Canvas.MinHeight = Math.Max(CalculateDimensions.CalculateHeight(this), 10);
+        Canvas.MinWidth = Math.Max(CalculateDimensions.CalculateWidth(this), 10);
         return scroll;
     }
 }

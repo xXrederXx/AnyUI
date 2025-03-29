@@ -1,3 +1,4 @@
+using System.Windows.Media;
 using AnyUI.Components;
 
 namespace AnyUI.TestApps;
@@ -8,7 +9,8 @@ public class BasicTest
     {
         AnyWindow window = new();
 
-        window.Style.Size.Value = new (100);
+        window.Style.Size.Value = new (300);
+        window.Style.BackgroundColor.Value = new SolidColorBrush(Colors.LightGray);
 
         AnyLabel label = new();
         label.Text = "Hello, Click The button";
