@@ -7,27 +7,29 @@ namespace AnyUI.Components;
 
 public class AnyWindow : BaseComponent
 {
-#pragma warning disable CS8618 // if it would be null after leafing cunstructor, the constructor threw an exception
+#pragma warning disable CS8618 // If it would leave with null the app threw an error
     private static Application app;
-#pragma warning restore CS8618
     private readonly Window window;
     private readonly ScrollViewer scroll = new();
+    public static AnyWindow? instance { get; private set; }
+#pragma warning restore CS8618 
 
     public AnyWindow()
     {
-        if (app != null)
+        if (instance != null)
         {
             throw new Exception("You already opened a Window. To open another use the class xyz");
         }
+        instance = this;
         window = new Window();
         app = new Application();
         scroll.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-        scroll.Content = canvas;
+        scroll.Content = Canvas;
         window.Content = scroll;
-        canvas.Background = Style.BackgroundColor;
+        Canvas.Background = Style.BackgroundColor;
         uidPrefix = "Win";
-        LastGenerated = canvas;
+        LastGenerated = Canvas;
         BaseComponent parent = new();
         parent.Children.Add(this);
         this.Parent = parent;
@@ -35,14 +37,14 @@ public class AnyWindow : BaseComponent
 
     public void Run()
     {
-        canvas.MinHeight = CalculateDimensions.CalculateHeight(this);
-        canvas.MinWidth = CalculateDimensions.CalculateWidth(this);
+        Canvas.MinHeight = CalculateDimensions.CalculateHeight(this);
+        Canvas.MinWidth = CalculateDimensions.CalculateWidth(this);
         app.Run(window);
     }
     public override UIElement GenerateUIElement()
     {
-        canvas.Background = Style.BackgroundColor;
-        canvas.Uid = uidPrefix + canvas.GetHashCode();
+        Canvas.Background = Style.BackgroundColor;
+        Canvas.Uid = uidPrefix + Canvas.GetHashCode();
         return scroll;
     }
 }

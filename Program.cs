@@ -6,11 +6,13 @@ namespace AnyUI;
 
 internal class Program
 {
-    private static readonly AnyWindow anyWindow = new();
+    private static AnyWindow anyWindow;
 
     [STAThread] // Required for WPF
     private static void Main(string[] args)
     {
+        anyWindow = new();
+
         BaseComponent outer = new();
         outer.Style.Size.Value = new(300);
         outer.Style.Position.Value = new(100);
@@ -21,6 +23,8 @@ internal class Program
 
         AnyLabel anyLabel = new();
         anyLabel.Style.Size.Value = new(200, 50);
+        anyLabel.Style.Position.Value = new(10);
+        anyLabel.Style.RenderMode.Value = Utility.Types.RenderMode.Fixed;
         anyLabel.Style.BorderThickness.Value = new(1);
         anyLabel.Style.CornerRadius.Value = new(4);
         anyLabel.Text = "A looong text xD xD";

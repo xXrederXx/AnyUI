@@ -31,6 +31,6 @@ public class AnyLabel : BaseComponent
 
     protected override void FinishUIElementGeneration()
     {
-        canvas.Children.Add(generateLabel());
+        Canvas.Children.Add(generateLabel());
     }
 }

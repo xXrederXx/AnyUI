@@ -42,6 +42,6 @@ public class AnyButton : BaseComponent
 
     protected override void FinishUIElementGeneration()
     {
-        canvas.Children.Add(generateButton());
+        Canvas.Children.Add(generateButton());
     }
 }

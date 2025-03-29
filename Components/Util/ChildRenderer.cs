@@ -6,19 +6,19 @@ namespace AnyUI.Components.Util;
 public class ChildRenderer
 {
     public readonly List<BaseComponent> Children = [];
-    protected Canvas canvas;
+    public Canvas Canvas { get; protected set; }
 
     public ChildRenderer()
     {
-        if (canvas is null)
+        if (Canvas is null)
         {
-            canvas = new Canvas();
+            Canvas = new Canvas();
         }
     }
 
     public ChildRenderer(Canvas canvas)
     {
-        this.canvas = canvas;
+        this.Canvas = canvas;
     }
 
     public void ReRender()
@@ -38,10 +38,10 @@ public class ChildRenderer
             }
             else
             {
-                canvas.RemoveChild(child);
+                Canvas.RemoveChild(child);
                 child.Reset();
                 child.ReRender();
-                canvas.PlaceChild(child);
+                Canvas.PlaceChild(child);
             }
         }
     }
@@ -54,14 +54,14 @@ public class ChildRenderer
         }
         child.Parent = this as BaseComponent;
         Children.Add(child);
-        canvas.PlaceChild(child);
+        Canvas.PlaceChild(child);
     }
 
     public void RemoveChild(BaseComponent child)
     {
         if (Children.Remove(child))
         {
-            canvas.RemoveChild(child);
+            Canvas.RemoveChild(child);
             child.Parent = null;
         }
         else

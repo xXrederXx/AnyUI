@@ -18,6 +18,7 @@ public class Style
     public readonly StyleVar<Font> Font;
     public readonly StyleVar<Thickness> Margin;
     public readonly StyleVar<Thickness> Padding;
+    public readonly StyleVar<RenderMode> RenderMode;
     public Action? OnStyleChanged;
 
     public Style(
@@ -30,7 +31,8 @@ public class Style
         Brush? TextColor = null,
         Font? Font = null,
         Thickness? Margin = null,
-        Thickness? Padding = null
+        Thickness? Padding = null,
+        RenderMode? RenderMode = null
     )
     {
         this.Size = new(false, Size ?? new(20));
@@ -53,6 +55,7 @@ public class Style
         );
         this.Margin = new(false, Margin ?? new(0));
         this.Padding = new(false, Padding ?? new(0));
+        this.RenderMode = new(false, RenderMode ?? Utility.Types.RenderMode.Auto);
 
         SubscribeActions();
     }
@@ -74,6 +77,7 @@ public class Style
         Font.OnChanged += ToCall;
         Margin.OnChanged += ToCall;
         Padding.OnChanged += ToCall;
+        RenderMode.OnChanged += ToCall;
     }
 
     public void UpdateInheritValues(BaseComponent? parent)
@@ -93,5 +97,6 @@ public class Style
         Font.UpdateStyleVar(style.Font);
         Margin.UpdateStyleVar(style.Margin);
         Padding.UpdateStyleVar(style.Padding);
+        RenderMode.UpdateStyleVar(style.RenderMode);
     }
 }

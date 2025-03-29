@@ -56,11 +56,11 @@ public class BaseComponent : ChildRenderer
         Vector2 size = Style.Size;
         CornerRadius cornerRadius = Style.CornerRadius;
 
-        canvas.Width = size.X;
-        canvas.Height = size.Y;
+        Canvas.Width = size.X;
+        Canvas.Height = size.Y;
 
-        canvas.Background = Style.BackgroundColor;
-        canvas.Clip = cornerRadius.GenerateClip(canvas.Width, canvas.Height);
+        Canvas.Background = Style.BackgroundColor;
+        Canvas.Clip = cornerRadius.GenerateClip(Canvas.Width, Canvas.Height);
 
         Border border = new()
         {
@@ -68,7 +68,7 @@ public class BaseComponent : ChildRenderer
             BorderThickness = Style.BorderThickness,
             BorderBrush = Style.BorderColor,
             Background = Style.BorderColor,
-            Child = canvas,
+            Child = Canvas,
         };
 
         UIElement element = border;
@@ -84,7 +84,7 @@ public class BaseComponent : ChildRenderer
 
     public void Reset()
     {
-        canvas = new Canvas();
+        Canvas = new Canvas();
     }
 
     protected virtual void FinishUIElementGeneration() { }
