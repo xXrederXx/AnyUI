@@ -3,26 +3,6 @@ namespace AnyUI.Styling;
 public class StyleVar<T>
 {
     private T? value;
-    public T Value
-    {
-        get
-        {
-            if (HasCustomValue && value != null)
-            {
-                return value;
-            }
-            else
-            {
-                return GetDefaultValue;
-            }
-        }
-        set
-        {
-            this.value = value;
-            HasCustomValue = true;
-            OnChanged?.Invoke();
-        }
-    }
     public readonly bool Inherit;
     public Action? OnChanged;
 
@@ -40,8 +20,27 @@ public class StyleVar<T>
 
     public void UpdateStyleVar(StyleVar<T> parentStyleVar)
     {
-        parentValue = parentStyleVar.Value;
+        parentValue = parentStyleVar.Get();
     }
 
-    public static implicit operator T(StyleVar<T> styleVar) => styleVar.Value;
+    public T Get()
+    {
+        if (HasCustomValue && value != null)
+        {
+            return value;
+        }
+        else
+        {
+            return GetDefaultValue;
+        }
+    }
+
+    public void Set(T value)
+    {
+        this.value = value;
+        HasCustomValue = true;
+        OnChanged?.Invoke();
+    }
+
+    public static implicit operator T(StyleVar<T> styleVar) => styleVar.Get();
 }
