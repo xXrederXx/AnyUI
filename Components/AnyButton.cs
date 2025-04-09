@@ -1,9 +1,7 @@
 using System.Numerics;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using AnyUI.Components.Util;
-using AnyUI.Utility.Types;
 using AnyUI.Utility.UI;
 
 namespace AnyUI.Components;

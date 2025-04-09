@@ -1,7 +1,4 @@
-﻿using System.Windows.Media;
-using AnyUI.Components;
-using AnyUI.Components.Util;
-using AnyUI.TestApps;
+﻿using AnyUI.TestApps;
 
 namespace AnyUI;
 
