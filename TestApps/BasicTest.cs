@@ -16,7 +16,10 @@ public class BasicTest
         label.Text = "Hello, Click The button";
         label.Style.Position.Value = new (20, 5);
         
+        AnyButton button = new();
+        button.Style.Position.Value = new (0, 40);
         window.AddChild(label);
+        window.AddChild(button);
 
         window.Run();
     }
