@@ -9,15 +9,15 @@ public class BasicTest
     {
         AnyWindow window = new();
 
-        window.Style.Size.Value = new (300);
-        window.Style.BackgroundColor.Value = new SolidColorBrush(Colors.LightGray);
+        window.Style.Size.Set(new (300));
+        window.Style.BackgroundColor.Set(new SolidColorBrush(Colors.LightGray));
 
         AnyLabel label = new();
         label.Text = "Hello, Click The button";
-        label.Style.Position.Value = new (20, 5);
+        label.Style.Position.Set(new (20, 5));
         
         AnyButton button = new();
-        button.Style.Position.Value = new (0, 40);
+        button.Style.Position.Set(new (0, 40));
         window.AddChild(label);
         window.AddChild(button);
 

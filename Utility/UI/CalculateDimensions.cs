@@ -21,10 +21,10 @@ public static class CalculateDimensions
     private static double RecurisiveHeightCalc(BaseComponent component)
     {
         double maxValue =
-            component.Style.Position.Value.Y
-            + component.Style.Size.Value.Y
-            + component.Style.BorderThickness.Value.Top * 2
-            + component.Style.BorderThickness.Value.Bottom * 2;
+            component.Style.Position.Get().Y
+            + component.Style.Size.Get().Y
+            + component.Style.BorderThickness.Get().Top * 2
+            + component.Style.BorderThickness.Get().Bottom * 2;
 
         foreach (BaseComponent child in component.Children)
         {
@@ -54,10 +54,10 @@ public static class CalculateDimensions
     private static double RecurisiveWidthCalc(BaseComponent component)
     {
         double maxValue =
-            component.Style.Position.Value.X
-            + component.Style.Size.Value.X
-            + component.Style.BorderThickness.Value.Left * 2
-            + component.Style.BorderThickness.Value.Right * 2;
+            component.Style.Position.Get().X
+            + component.Style.Size.Get().X
+            + component.Style.BorderThickness.Get().Left * 2
+            + component.Style.BorderThickness.Get().Right * 2;
 
         foreach (BaseComponent child in component.Children)
         {

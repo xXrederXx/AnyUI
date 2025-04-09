@@ -13,7 +13,7 @@ public static class CanvasExtension
     {
         // Ensure the element is added to the canvas
         UIElement element = child.GenerateUIElement();
-        switch (child.Style.RenderMode.Value)
+        switch (child.Style.RenderMode.Get())
         {
             case RenderMode.Fixed:
                 RenderFixed(child, element);
