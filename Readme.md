@@ -56,3 +56,9 @@ This project is licensed under the **IDK what license** license.
 - You may not sell this library as your own product.
 - No attribution is required.
 
+## Comit Structure
+Not open for commits, but my abbreviations are:
+-   feat: Feature
+-   fix: fix for a bug
+-   upt: update Something
+-   rft: refactoring
